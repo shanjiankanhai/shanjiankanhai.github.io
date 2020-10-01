@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="1.指针2.动态分配内存int *p &#x3D; new int; &#x2F;&#x2F; 为变量请求内存*p &#x3D; 10; &#x2F;&#x2F; 在分配的地址存储值 cout &lt;&lt; *p &lt;&lt; endl;  delete p; &#x2F;&#x2F; 释放内存 忘记释放使用new关键字分配的内存将导致内存泄漏，因为内存将保持分配状态，直到程序关闭。可以使用 delete 运算符释放它所占用的内存 动态分配内存可以分配给数组 3.ra">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【码农笔记】c++笔记（一）">
+<meta property="og:url" content="http://wehaveweshare.top/2019/02/24/c-%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Lennon&#39;s Blog">
+<meta property="og:description" content="1.指针2.动态分配内存int *p &#x3D; new int; &#x2F;&#x2F; 为变量请求内存*p &#x3D; 10; &#x2F;&#x2F; 在分配的地址存储值 cout &lt;&lt; *p &lt;&lt; endl;  delete p; &#x2F;&#x2F; 释放内存 忘记释放使用new关键字分配的内存将导致内存泄漏，因为内存将保持分配状态，直到程序关闭。可以使用 delete 运算符释放它所占用的内存 动态分配内存可以分配给数组 3.ra">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-02-24T12:57:30.000Z">
+<meta property="article:modified_time" content="2019-02-28T11:10:53.673Z">
+<meta property="article:author" content="Lennon">
+<meta property="article:tag" content="码农">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>【码农笔记】c++笔记（一）</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+
+    
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+    <!-- jquery -->
+    
+<script src="/lib/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+    <div class="banner">
+<div id="blogtitel" class="blogtitel">Lennon&#39;s Blog</div>
+<ul id="wrapper" class="wrapper">
+  <div class="sun">
+    <div class="star"></div>
+  </div>
+  <div class="mercury">
+    <div class="planet">
+      <div class="shadow"></div>
+    </div>
+  </div>
+  <div class="venus">
+    <div class="planet">
+      <div class="shadow"></div>
+    </div>
+  </div>
+  <div class="earth">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="mars">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="jupiter">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+</ul>
+</div>
+
+    <div class="background">
+      
+        <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/%E7%A0%81%E5%86%9C%E7%AC%94%E8%AE%B0/">码农笔记</a></li>
+         
+          <li><a href="/tags/%E5%B0%8F%E8%AE%B0/">小记</a></li>
+         
+          <li><a href="/tags/%E4%BF%A1%E5%AE%89%E7%AC%94%E8%AE%B0/">信安笔记</a></li>
+         
+          <li><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+         
+          <li><a href="/tags/20%E5%B9%B4%E8%AE%A1%E5%88%92/">20年计划</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2019/02/26/%E4%B8%96%E7%95%8C%E8%BF%99%E4%B9%88%E5%A4%A7/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2019/02/23/%E8%BF%99%E6%98%AF%E6%88%91%E5%98%9B/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://wehaveweshare.top/2019/02/24/c-%E7%AC%94%E8%AE%B0/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://wehaveweshare.top/2019/02/24/c-%E7%AC%94%E8%AE%B0/&text=【码农笔记】c++笔记（一）"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://wehaveweshare.top/2019/02/24/c-%E7%AC%94%E8%AE%B0/&title=【码农笔记】c++笔记（一）"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://wehaveweshare.top/2019/02/24/c-%E7%AC%94%E8%AE%B0/&is_video=false&description=【码农笔记】c++笔记（一）"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=【码农笔记】c++笔记（一）&body=Check out this article: http://wehaveweshare.top/2019/02/24/c-%E7%AC%94%E8%AE%B0/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://wehaveweshare.top/2019/02/24/c-%E7%AC%94%E8%AE%B0/&title=【码农笔记】c++笔记（一）"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://wehaveweshare.top/2019/02/24/c-%E7%AC%94%E8%AE%B0/&title=【码农笔记】c++笔记（一）"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://wehaveweshare.top/2019/02/24/c-%E7%AC%94%E8%AE%B0/&title=【码农笔记】c++笔记（一）"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://wehaveweshare.top/2019/02/24/c-%E7%AC%94%E8%AE%B0/&title=【码农笔记】c++笔记（一）"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://wehaveweshare.top/2019/02/24/c-%E7%AC%94%E8%AE%B0/&name=【码农笔记】c++笔记（一）&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%8C%87%E9%92%88"><span class="toc-number">1.</span> <span class="toc-text">1.指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D%E5%86%85%E5%AD%98"><span class="toc-number">2.</span> <span class="toc-text">2.动态分配内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-rand%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">3.rand（）函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-srand-%E5%87%BD%E6%95%B0%E7%94%A8%E4%BA%8E%E7%94%9F%E6%88%90%E7%9C%9F%E6%AD%A3%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%88%E9%9A%8F%E6%9C%BA%E7%A7%8D%E5%AD%90%EF%BC%89%E3%80%82"><span class="toc-number">4.</span> <span class="toc-text">4.srand() 函数用于生成真正的随机数（随机种子）。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E8%83%BD%E4%BB%85%E9%80%9A%E8%BF%87%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B%E7%9A%84%E4%B8%8D%E5%90%8C%E6%9D%A5%E9%87%8D%E8%BD%BD%E5%87%BD%E6%95%B0"><span class="toc-number">5.</span> <span class="toc-text">5.能仅通过返回类型的不同来重载函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%B0%86%E6%95%B0%E7%BB%84%E4%BC%A0%E9%80%92%E7%BB%99%E5%87%BD%E6%95%B0"><span class="toc-number">6.</span> <span class="toc-text">6.将数组传递给函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%87%BD%E6%95%B0%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-number">7.</span> <span class="toc-text">7.函数传递参数的方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%A0%E5%80%BC%E8%B0%83%E7%94%A8"><span class="toc-number">7.1.</span> <span class="toc-text">传值调用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E8%B0%83%E7%94%A8"><span class="toc-number">7.2.</span> <span class="toc-text">引用调用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-main-%E5%87%BD%E6%95%B0%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%EF%BC%9F"><span class="toc-number"></span> <span class="toc-text">8.main()函数的类型如何定义？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">9.类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA-private-%E6%88%90%E5%91%98%E4%B8%8D%E8%83%BD%E4%BB%8E%E7%B1%BB%E5%A4%96%E8%AE%BF%E9%97%AE-%E5%AF%B9%E5%A4%96%E4%B8%8D%E5%8F%AF%E8%A7%81-%E5%8F%AA%E8%83%BD%E4%BB%8E%E7%B1%BB%E5%86%85%E9%83%A8%E8%BF%9B%E8%A1%8C%E8%AE%BF%E9%97%AE%E3%80%82"><span class="toc-number">2.</span> <span class="toc-text">一个 private 成员不能从类外访问(对外不可见);只能从类内部进行访问。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E8%AF%B4%E6%98%8E%E7%AC%A6"><span class="toc-number">3.</span> <span class="toc-text">访问说明符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number"></span> <span class="toc-text">10.构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E7%B1%BB%E5%88%86%E5%B8%83%E4%BA%8E%E6%96%87%E4%BB%B6"><span class="toc-number"></span> <span class="toc-text">11.类分布于文件</span></a>
+    </div>
+  </span>
+</div>
+
+      
+      <div class="content index width mx-auto px2 my4">
+          
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        【码农笔记】c++笔记（一）
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Lennon's Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2019-02-24T12:57:30.000Z" itemprop="datePublished">2019-02-24</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E7%A0%81%E5%86%9C/" rel="tag">码农</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="1-指针"><a href="#1-指针" class="headerlink" title="1.指针"></a>1.指针</h3><h3 id="2-动态分配内存"><a href="#2-动态分配内存" class="headerlink" title="2.动态分配内存"></a>2.动态分配内存</h3><p><code>int *p = new int;</code> // 为变量请求内存<br><code>*p = 10;</code> // 在分配的地址存储值</p>
+<p><code>cout &lt;&lt; *p &lt;&lt; endl; </code></p>
+<p><code>delete p;</code> // 释放内存</p>
+<p>忘记释放使用new关键字分配的内存将导致内存泄漏，因为内存将保持分配状态，直到程序关闭。可以使用 delete 运算符释放它所占用的内存</p>
+<p>动态分配内存可以分配给数组</p>
+<h3 id="3-rand（）函数"><a href="#3-rand（）函数" class="headerlink" title="3.rand（）函数"></a>3.rand（）函数</h3><p>创建随机数，需要包含头文件</p>
+<p><code>include&lt;iostream&gt;</code></p>
+<p><code>#include&lt;cstdlib&gt;</code></p>
+<p><code>using namespace std;</code></p>
+<p><code>int main()&#123;</code></p>
+<pre><code>cout&lt;&lt;rand()</code></pre>
+<p><code>&#125;</code></p>
+<p>rand() 函数只会返回一个<em>伪随机数</em>。这意味着每次运行代码时，都会生成相同的编号</p>
+<h3 id="4-srand-函数用于生成真正的随机数（随机种子）。"><a href="#4-srand-函数用于生成真正的随机数（随机种子）。" class="headerlink" title="4.srand() 函数用于生成真正的随机数（随机种子）。"></a>4.srand() 函数用于生成真正的随机数（随机种子）。</h3><p>srand() 函数允许指定一个种子(seed) 值作为其参数，用于rand() 函数的算法</p>
+<p><code>int main () &#123;</code></p>
+<p>  <code>srand(30);</code></p>
+<p>  <code>for (int x = 1; x &lt;= 10; x++) &#123;</code></p>
+<pre><code>cout &lt;&lt; 1 + (rand() % 5) &lt;&lt; endl;</code></pre>
+<p>  <code>&#125;</code></p>
+<p><code>&#125;</code></p>
+<p>更改种子(seed) 值会改变rand() 的返回值。但是，相同的参数将导致相同的输出。</p>
+<p>在 C++ 中，生成真正随机数的方法是使用当前时间作为srand() 函数的种子值。</p>
+<p>下面是一个例子，用time() 函数来获得系统时间的秒数，并随机种子给rand() 函数。在使用时，我们需要包含<code>&lt;ctime&gt;</code>头文件。</p>
+<p><code>#include &lt;iostream&gt;</code></p>
+<p><code>#include &lt;cstdlib&gt;</code></p>
+<p><code>#include &lt;ctime&gt;</code></p>
+<p><code>using namespace std;</code></p>
+<p><code>int main () &#123;</code></p>
+<p>  <code>srand(time(0));</code></p>
+<p>  <code>for (int x = 1; x &lt;= 10; x++) &#123;</code></p>
+<pre><code>cout &lt;&lt; 1 + (rand() % 5) &lt;&lt; endl;</code></pre>
+<p>  <code>&#125;</code></p>
+<p><code>&#125;</code></p>
+<p>time(0) 将返回当前秒数，提示srand() 函数每次程序运行时为rand() 函数设置一个不同的种子。每次我们运行程序时，使用这个种子值将会创建一个不同的输出。</p>
+<h3 id="5-能仅通过返回类型的不同来重载函数"><a href="#5-能仅通过返回类型的不同来重载函数" class="headerlink" title="5.能仅通过返回类型的不同来重载函数"></a>5.能仅通过返回类型的不同来重载函数</h3><h3 id="6-将数组传递给函数"><a href="#6-将数组传递给函数" class="headerlink" title="6.将数组传递给函数"></a>6.将数组传递给函数</h3><p>在 C++ 中，一个数组也可以作为参数传递给一个函数。</p>
+<p>声明函数时，参数应该用方括号[] 来定义。</p>
+<p>下面是一个例子：</p>
+<p><code>void w3cArray(int arr[], int size) &#123;</code></p>
+<p> <code> for(int x=0; x&lt;size; x++) &#123;</code></p>
+<pre><code>cout &lt;&lt; arr[x];</code></pre>
+<p> <code> &#125;</code></p>
+<p><code>&#125;</code></p>
+<h3 id="7-函数传递参数的方式"><a href="#7-函数传递参数的方式" class="headerlink" title="7.函数传递参数的方式"></a>7.函数传递参数的方式</h3><h4 id="传值调用"><a href="#传值调用" class="headerlink" title="传值调用"></a>传值调用</h4><h4 id="引用调用"><a href="#引用调用" class="headerlink" title="引用调用"></a>引用调用</h4><p>向函数传递参数的引用调用方法，把引用的地址复制给形式参数。在函数内，该引用用于访问调用中要用到的实际参数。这意味着，修改形式参数会影响实际参数。</p>
+<p>按引用传递值，参数引用被传递给函数，就像传递其他值给函数一样。</p>
+<p><code>void swap(int *x) &#123;</code></p>
+<p>  <code>*x = 50;</code></p>
+<p><code>&#125;</code></p>
+<p><code>int main() &#123;</code></p>
+<p>   <code>int var = 10;</code></p>
+<p>  <code>swap(&amp;var);</code></p>
+<p>  <code>cout &lt;&lt; var;</code></p>
+<p><code>&#125;</code></p>
+<p>// 输出 50</p>
+<p>使用操作符＆的地址将变量直接传递给函数。</p>
+<p>函数声明表示该函数将一个指针作为其参数（使用 * 运算符定义）。</p>
+<p>结果，函数实际上已经改变了参数的值，通过指针访问它。</p>
+<h2 id="8-main-函数的类型如何定义？"><a href="#8-main-函数的类型如何定义？" class="headerlink" title="8.main()函数的类型如何定义？"></a>8.main()函数的类型如何定义？</h2><h3 id="9-类"><a href="#9-类" class="headerlink" title="9.类"></a>9.类</h3><p><code>class BankAccount &#123;</code></p>
+<p><code>&#125;;</code></p>
+<p>用一个公开的方法创建一个类，并打印出 “Hi,W3cschool”。</p>
+<p><code>class BankAccount &#123;</code></p>
+<p>  <code>public:</code></p>
+<pre><code>void sayHi() &#123;
+
+  cout &lt;&lt; &quot;Hi,W3cschool&quot; &lt;&lt; endl;
+
+&#125;</code></pre>
+<p><code>&#125;;</code></p>
+<p>下一步是实例化 BankAccount 类的一个对象，就像定义一个类型的变量一样，区别<br>在于对象的类型是 BankAccount。</p>
+<p><code>int main() </code></p>
+<p><code>&#123;</code></p>
+<p>  <code>BankAccount test;</code></p>
+<p>  <code>test.sayHi();</code></p>
+<p><code>&#125;</code></p>
+<h3 id="一个-private-成员不能从类外访问-对外不可见-只能从类内部进行访问。"><a href="#一个-private-成员不能从类外访问-对外不可见-只能从类内部进行访问。" class="headerlink" title="一个 private 成员不能从类外访问(对外不可见);只能从类内部进行访问。"></a>一个 private 成员不能从类外访问(对外不可见);只能从类内部进行访问。</h3><p><code>#include &lt;iostream&gt;</code></p>
+<p><code>#include &lt;string&gt;</code></p>
+<p><code>using namespace std;</code></p>
+<p><code>class myClass &#123;</code></p>
+<p>  <code>public:</code></p>
+<pre><code>void setName(string x) &#123;
+  name = x;
+&#125;</code></pre>
+<p>  <code>private:</code></p>
+<pre><code>string name</code></pre>
+<p><code>&#125;;</code></p>
+<p><code>int main() &#123;</code></p>
+<p>  <code>myClass myObj;</code></p>
+<p>  <code>myObj.setName(&quot;Loen&quot;);</code></p>
+<p>  <code>return 0;</code></p>
+<p><code>&#125;</code></p>
+<h3 id="访问说明符"><a href="#访问说明符" class="headerlink" title="访问说明符"></a>访问说明符</h3><p>我们可以添加另一个公共方法来获取属性的值。</p>
+<p><code>class myClass &#123;</code></p>
+<p>  <code>public:</code></p>
+<pre><code>void setName(string x) &#123;
+  name = x;
+&#125;
+string getName() &#123;
+  return name;
+&#125;</code></pre>
+<p>  <code>private:</code></p>
+<pre><code>string name;</code></pre>
+<p><code>&#125;;</code></p>
+<pre><code>getName() 方法返回 私有属性 name 的值。</code></pre>
+<h2 id="10-构造函数"><a href="#10-构造函数" class="headerlink" title="10.构造函数"></a>10.构造函数</h2><h2 id="11-类分布于文件"><a href="#11-类分布于文件" class="headerlink" title="11.类分布于文件"></a>11.类分布于文件</h2>
+  </div>
+</article>
+
+
+
+      </div>
+      
+       <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/%E7%A0%81%E5%86%9C%E7%AC%94%E8%AE%B0/">码农笔记</a></li>
+         
+          <li><a href="/tags/%E5%B0%8F%E8%AE%B0/">小记</a></li>
+         
+          <li><a href="/tags/%E4%BF%A1%E5%AE%89%E7%AC%94%E8%AE%B0/">信安笔记</a></li>
+         
+          <li><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+         
+          <li><a href="/tags/20%E5%B9%B4%E8%AE%A1%E5%88%92/">20年计划</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%8C%87%E9%92%88"><span class="toc-number">1.</span> <span class="toc-text">1.指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D%E5%86%85%E5%AD%98"><span class="toc-number">2.</span> <span class="toc-text">2.动态分配内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-rand%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">3.rand（）函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-srand-%E5%87%BD%E6%95%B0%E7%94%A8%E4%BA%8E%E7%94%9F%E6%88%90%E7%9C%9F%E6%AD%A3%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%88%E9%9A%8F%E6%9C%BA%E7%A7%8D%E5%AD%90%EF%BC%89%E3%80%82"><span class="toc-number">4.</span> <span class="toc-text">4.srand() 函数用于生成真正的随机数（随机种子）。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E8%83%BD%E4%BB%85%E9%80%9A%E8%BF%87%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B%E7%9A%84%E4%B8%8D%E5%90%8C%E6%9D%A5%E9%87%8D%E8%BD%BD%E5%87%BD%E6%95%B0"><span class="toc-number">5.</span> <span class="toc-text">5.能仅通过返回类型的不同来重载函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%B0%86%E6%95%B0%E7%BB%84%E4%BC%A0%E9%80%92%E7%BB%99%E5%87%BD%E6%95%B0"><span class="toc-number">6.</span> <span class="toc-text">6.将数组传递给函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%87%BD%E6%95%B0%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-number">7.</span> <span class="toc-text">7.函数传递参数的方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%A0%E5%80%BC%E8%B0%83%E7%94%A8"><span class="toc-number">7.1.</span> <span class="toc-text">传值调用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E8%B0%83%E7%94%A8"><span class="toc-number">7.2.</span> <span class="toc-text">引用调用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-main-%E5%87%BD%E6%95%B0%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%EF%BC%9F"><span class="toc-number"></span> <span class="toc-text">8.main()函数的类型如何定义？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">9.类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA-private-%E6%88%90%E5%91%98%E4%B8%8D%E8%83%BD%E4%BB%8E%E7%B1%BB%E5%A4%96%E8%AE%BF%E9%97%AE-%E5%AF%B9%E5%A4%96%E4%B8%8D%E5%8F%AF%E8%A7%81-%E5%8F%AA%E8%83%BD%E4%BB%8E%E7%B1%BB%E5%86%85%E9%83%A8%E8%BF%9B%E8%A1%8C%E8%AE%BF%E9%97%AE%E3%80%82"><span class="toc-number">2.</span> <span class="toc-text">一个 private 成员不能从类外访问(对外不可见);只能从类内部进行访问。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E8%AF%B4%E6%98%8E%E7%AC%A6"><span class="toc-number">3.</span> <span class="toc-text">访问说明符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number"></span> <span class="toc-text">10.构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E7%B1%BB%E5%88%86%E5%B8%83%E4%BA%8E%E6%96%87%E4%BB%B6"><span class="toc-number"></span> <span class="toc-text">11.类分布于文件</span></a>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://wehaveweshare.top/2019/02/24/c-%E7%AC%94%E8%AE%B0/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://wehaveweshare.top/2019/02/24/c-%E7%AC%94%E8%AE%B0/&text=【码农笔记】c++笔记（一）"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://wehaveweshare.top/2019/02/24/c-%E7%AC%94%E8%AE%B0/&title=【码农笔记】c++笔记（一）"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://wehaveweshare.top/2019/02/24/c-%E7%AC%94%E8%AE%B0/&is_video=false&description=【码农笔记】c++笔记（一）"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=【码农笔记】c++笔记（一）&body=Check out this article: http://wehaveweshare.top/2019/02/24/c-%E7%AC%94%E8%AE%B0/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://wehaveweshare.top/2019/02/24/c-%E7%AC%94%E8%AE%B0/&title=【码农笔记】c++笔记（一）"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://wehaveweshare.top/2019/02/24/c-%E7%AC%94%E8%AE%B0/&title=【码农笔记】c++笔记（一）"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://wehaveweshare.top/2019/02/24/c-%E7%AC%94%E8%AE%B0/&title=【码农笔记】c++笔记（一）"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://wehaveweshare.top/2019/02/24/c-%E7%AC%94%E8%AE%B0/&title=【码农笔记】c++笔记（一）"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://wehaveweshare.top/2019/02/24/c-%E7%AC%94%E8%AE%B0/&name=【码农笔记】c++笔记（一）&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+      
+      <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Lennon
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/%E7%A0%81%E5%86%9C%E7%AC%94%E8%AE%B0/">码农笔记</a></li>
+         
+          <li><a href="/tags/%E5%B0%8F%E8%AE%B0/">小记</a></li>
+         
+          <li><a href="/tags/%E4%BF%A1%E5%AE%89%E7%AC%94%E8%AE%B0/">信安笔记</a></li>
+         
+          <li><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+         
+          <li><a href="/tags/20%E5%B9%B4%E8%AE%A1%E5%88%92/">20年计划</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+      
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+
+    </div>
+</body>
+</html>
